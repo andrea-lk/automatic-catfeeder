@@ -1,0 +1,97 @@
+import time
+import paho.mqtt.client as mqtt
+import sys
+
+USERNAME = "hextech-andrea"
+PASSWORD = "andrea"
+commands = "hextech/hextech-andrea/commands"
+
+# Set of unacknowledged publish message IDs
+unacked_publish = set()
+
+# Fixed number of steps to move the motor
+OPEN_STEPS = -400
+CLOSE_STEPS = 400
+
+def setup_mqtt():
+    mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+
+    # Assign callbacks
+    mqttc.on_publish = on_publish
+    mqttc.on_connect = on_connect
+
+    # Set user data (this stores unacknowledged message ids)
+    mqttc.user_data_set(unacked_publish)
+
+    # Set username and password for MQTT connection
+    mqttc.username_pw_set(username=USERNAME, password=PASSWORD)
+
+    # Connect to the MQTT server
+    mqttc.connect("mqtt.hextronics.cloud", 1883)
+
+    # Start the MQTT network loop
+    mqttc.loop_start()
+
+    return mqttc
+
+def on_publish(client, userdata, mid, reason_code, properties=None):
+    # Removes the message ID from the set of unacknowledged messages
+    userdata.remove(mid)
+    print(f"Published message ID: {mid}")
+
+def on_connect(client, userdata, flags, reason_code, properties=None):
+    print(f"Connected with result code {reason_code}")
+
+def move_steps(mqttc, steps):
+    # Create the payload for the MQTT message to move the motor
+    steps_payload = f"stepper.00_speed_400|stepper.00_move_{steps}_1"
+    # Publish the payload and wait for it to be acknowledged
+    publish_and_wait(mqttc, steps_payload)
+
+def publish_and_wait(mqttc, payload):
+    msg_info = mqttc.publish(commands, payload, 0, False)
+    unacked_publish.add(msg_info.mid)
+
+    # Wait for the message to be acknowledged
+    while len(unacked_publish):
+        time.sleep(0.1)
+
+    # Ensure the message is published
+    msg_info.wait_for_publish()
+
+def feed_cat(mqttc):
+    # Move the motor to open the dispensing disc
+    move_steps(mqttc, OPEN_STEPS)
+    # Wait for 4 seconds
+    time.sleep(4)
+    # Move the motor to close the dispensing disc
+    move_steps(mqttc, CLOSE_STEPS)
+
+def set_feeding_schedule(mqttc, times_per_day):
+    interval = 86400 / times_per_day  # seconds in a day divided by times per day
+
+    while True:
+        feed_cat(mqttc)
+        time.sleep(interval)
+
+def main():
+    mqttc = setup_mqtt()
+
+    # Handle command-line arguments
+    if len(sys.argv) > 1:
+        command = sys.argv[1]
+        if command == "feed":
+            feed_cat(mqttc)
+        elif command == "schedule":
+            if len(sys.argv) == 3:
+                times_per_day = int(sys.argv[2])
+                set_feeding_schedule(mqttc, times_per_day)
+            else:
+                print("Please provide the number of times per day to feed the cat.")
+    else:
+        while True:
+            # Keep the MQTT client running
+            time.sleep(1)
+
+if __name__ == "__main__":
+    main()
