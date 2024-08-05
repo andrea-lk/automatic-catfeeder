@@ -8,6 +8,7 @@ Automated Feeding Schedule: Dispenses food at pre-defined times set in the code.
 
 ## Possible Challenges 
 Animal Behavior: Other animals such as racoons might try to tamper with the feeder.
+
 Calibration: Calibrating the dispenser to ensure accurate portions. 
 
 ## Organization
