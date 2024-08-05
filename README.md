@@ -10,5 +10,5 @@ Automated Feeding Schedule: Dispenses food at pre-defined times set in the code.
 Cat Behavior: Cats might try to tamper with the feeder. Make sure the design is secure and tamper-proof.
 Calibration: Calibrating the dispenser to ensure accurate portions. 
 
-##Organization
+## Organization
 The src contians all code created for the project. 
