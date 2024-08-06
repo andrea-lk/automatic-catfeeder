@@ -1,0 +1,7 @@
+Working on the Automatic Cat Feeder project has been an educational experience. I learned valuable skills in
+MQTT communication, GUI development with customtkinter, and scheduling automation tasks efficiently. Integrating hardware 
+with software, particularly using the HexTech circuit board, was a significant part of this project. HexTech proved to be
+extremely helpful, being very user-friendly and accessible for new engineers, and it allowed for a wide range of creative
+and practical applications. With HexTech, the possibilities for automation are vast, from managing tasks remotely to
+automating home functions, making life easier. Overall, this project highlighted the powerful potential of combining 
+reliable hardware with innovative software solutions. 
