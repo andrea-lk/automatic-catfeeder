@@ -53,3 +53,11 @@ This file contains the code for the graphical user interface using `customtkinte
 
 ## Organization
 The src contians all code created for the project. 
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit pull requests.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
