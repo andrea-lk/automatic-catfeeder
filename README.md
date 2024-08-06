@@ -7,7 +7,7 @@ This project is an automatic cat feeder that uses MQTT for communication and a g
 - [Installation](#installation)
 - [Usage](#usage)
 - [Code Overview](#code-overview)
-- [Contributing](#contributing)
+- [Organization](#organization)
 - [License](#license)
 
 ## Features
@@ -28,6 +28,11 @@ To set up this project locally, follow these steps:
    ```sh
    git clone https://github.com/your-username/automatic-cat-feeder.git
    cd automatic-cat-feeder
+   
+   ```sh
+2. **Install dependencies**:
+   pip install customtkinter paho-mqtt
+
 
 
 ## Organization
