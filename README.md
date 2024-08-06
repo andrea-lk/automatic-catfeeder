@@ -29,8 +29,9 @@ To set up this project locally, follow these steps:
    git clone https://github.com/your-username/automatic-cat-feeder.git
    cd automatic-cat-feeder
    
-   ```sh
+   
 2. **Install dependencies**:
+   ```sh
    pip install customtkinter paho-mqtt
 
 
