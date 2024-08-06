@@ -33,6 +33,21 @@ To set up this project locally, follow these steps:
 2. **Install dependencies**:
    ```sh
    pip install customtkinter paho-mqtt
+3. **Running the GUI**:
+   To run the graphical user interface, execute the following command:
+   ```sh
+   python GUI.py
+
+## Code Overview
+
+### GUI.py
+
+This file contains the code for the graphical user interface using `customtkinter`.
+
+* **MQTT Setup**: Connects to the MQTT server and sets up callbacks.
+* **Feeding Functionality**: Defines functions for feeding the cat and setting a feeding schedule.
+* **GUI Components**: Creates buttons and labels for user interaction.
+
 
 
 
