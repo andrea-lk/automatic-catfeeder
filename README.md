@@ -4,6 +4,7 @@ This project is an automatic cat feeder that uses MQTT for communication and a g
 
 ## Table of Contents
 - [Features](#features)
+- [Possible Challenges](#possible-challenges)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Code Overview](#code-overview)
